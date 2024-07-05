@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.12",
   "packageManager": "pnpm@9.1.1",
-  "description": "",
+  "description": "Personal CLI tool",
   "author": "Jianxing Xu <xjx_me@yeah.net>",
   "license": "MIT",
   "funding": "https://github.com/sponsors/jianxing-xu",
