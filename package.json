@@ -33,7 +33,7 @@
       ]
     }
   },
-  "bin": "./dist/index.js",
+  "bin": "./dist/index.mjs",
   "files": [
     "dist"
   ],
