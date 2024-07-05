@@ -1,7 +1,7 @@
 // @ts-check
-import antfu from '@antfu/eslint-config'
+import jianxing from '@jianxing/eslint-config'
 
-export default antfu(
+export default jianxing(
   {
     ignores: [
       // eslint ignore globs here
