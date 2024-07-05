@@ -6,22 +6,50 @@
 [![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
 
-_description_
+Personal CLI tool
 
-> **Note**:
-> Replace `jx`, `_description_` and `jianxing-xu` globally to use this template.
+- [x] Cloen repo
+- [x] Common text snippets
+- [ ] ...
 
-## Sponsors
+## Install
 
-<p align="center">
-  <a href="https://cdn.jsdelivr.net/gh/jianxing-xu/static/sponsors.svg">
-    <img src='https://cdn.jsdelivr.net/gh/jianxing-xu/static/sponsors.svg'/>
-  </a>
-</p>
+```bash
+#pnpm
+pnpm i -g @jianxing/jx
+# npm
+npm i -g @jianxing/jx
+# yarn
+yarn add -g @jianxing/jx
+```
+
+##  Usage
+
+### Command
+
+```bash
+# jx config
+jx config repoUrl=xxx # common text snippets repo url
+jx config accessToken=xxx # auth account token, generate by Profile -> Settings -> Developer settings -> Personal access tokens -> Tokens(classic) or Fine-grained tokens
+
+# jx repo
+jx repo # show all common text list
+jx repo <filePath> # get a file content
+jx repo <filePath> -d # delete a file
+jx repo <filePath> "some content" -s # put some content to file
+jx repo <filePath> "some content" -sn # create a file with content
+jx repo <filePath> "some content" -a # append content to a file
+
+# jx start <repo> [owner] [ref]，owner defult is self
+jx start <repo> # clone <repo>
+jx start <repo> [owner] # clone <repo> of [owner]
+jx start <repo> [owner] [ref] # ref is branch or tag or commitHash
+
+```
 
 ## License
 
-[MIT](./LICENSE) License © 2023-PRESENT [Anthony Fu](https://github.com/jianxing-xu)
+[MIT](./LICENSE) License © 2023-PRESENT [Jianxing Xu](https://github.com/jianxing-xu)
 
 <!-- Badges -->
 
