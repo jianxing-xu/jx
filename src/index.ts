@@ -11,7 +11,6 @@ const starterCommand = new Starter(program)
 repo.registerCommand()
 configCommand.registerCommand()
 starterCommand.registerCommand()
-
 program.parse()
 // eslint-disable-next-line node/prefer-global/process
 process.on('SIGINT', () => {

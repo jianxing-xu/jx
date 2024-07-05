@@ -125,29 +125,49 @@ export class Repo {
     }
   }
 
+  async handleDelete(filePath: string) {
+    const spin = ora().start('Updating...')
+    const data = await this.getFileObj(filePath)
+    if ('sha' in data) {
+      octoUtil.getOctokit().rest.repos.deleteFile({
+        path: filePath,
+        owner: octoUtil.owner,
+        repo: octoUtil.repo,
+        message: `Delete a file ${filePath}`,
+        sha: data.sha,
+      }).then(() => {
+        spin.succeed('Success！')
+      }).finally(() => {
+        spin.stop()
+      })
+    }
+  }
+
   registerCommand() {
     const command = this.program.command('repo').description('some repo operation')
-    command.argument('<arg1>', 'fileName or path')
+    command.argument('[arg1]', 'fileName or path')
     command.argument('[arg2]', 'file content', '')
-    command.option('-g, --get', 'get a file content', false)
     command.option('-s, --set', 'set a file with content', false)
-    command.option('-sn, --newfile', 'have a new file, bool', false)
+    command.option('-sn, --newfile', 'create a file with content', false)
     command.option('-a, --append', 'append content of file', false)
     command.option('-l, --list', 'list all files of path', false)
+    command.option('-d, --delete', 'delete some file or dir', false)
     command.action((arg1, arg2) => {
       const opts = command.opts()
       this.opts = opts
-      const c = Object.values(opts).filter(Boolean).reduce((p, c) => p + c, 0)
-      if (c !== 1)
-        throw new Error('only use a option in [-g,-s,-sn,-a,-l]')
-      if (opts.get)
+      const noneOpt = Object.values(opts).filter(Boolean).length === 0
+      const isNoneParma = !arg1 && !arg2 && noneOpt
+      if (noneOpt && !isNoneParma)
         this.handleGet(arg1)
       if (opts.set || opts.newfile)
         this.handleSet(arg1, arg2)
-      if (opts.append)
+      if (opts.append && arg2)
         this.handleAppend(arg1, arg2)
-      if (opts.list)
+      if (opts.list || isNoneParma)
         this.handleLs(arg1)
+      if (opts.delete) {
+        this.handleDelete(arg1)
+      }
     })
   }
 
